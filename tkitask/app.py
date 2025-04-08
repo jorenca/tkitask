@@ -20,7 +20,7 @@ def get_db():
 
 
 @app.get("/question")
-def read_item(round: str, value: str, db: Session = Depends(get_db)):
+def get_question(round: str, value: str, db: Session = Depends(get_db)):
 
     questions_query = db.query(Question).filter(
         Question.round == round,
@@ -58,4 +58,30 @@ def verify_answer(answer: VerifyAnswerRequest, db: Session = Depends(get_db)):
     return {
         "is_correct": gpt_response == 'correct',
         "ai_response": gpt_response
+    }
+
+
+@app.post("/agent-play/")
+def agent_play(db: Session = Depends(get_db)):
+
+    random_question = db.query(Question).order_by(func.random()).first()
+
+    question_prompt = f"""
+    Imagine you're a played in the game Jeopardy, and you're given the following question in the "{random_question.round}" round.
+    Answer with a single line:
+    {random_question.question}
+    """
+    gpt_answer = ask_gpt(question_prompt)
+
+    return {
+        'agent_name': 'ChatGPT',
+        'question': random_question.question,
+        'ai_answer': gpt_answer,
+        'actual_answer': random_question.answer,
+        'is_correct': verify_answer(
+            VerifyAnswerRequest(
+                user_answer=gpt_answer,
+                question_id=random_question.question_id
+            ),
+            db)
     }
