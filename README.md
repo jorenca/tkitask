@@ -52,12 +52,19 @@ Fill out your DB username and password in the `.env` file.
 
 
 ### Prepare questions dataset
-Pull the questions:
+Pull the questions CSV:
 ```bash
 curl https://raw.githubusercontent.com/russmatney/go-jeopardy/refs/heads/master/JEOPARDY_CSV.csv -o dataset.csv
+```
+Create the questions table in PostgreSQL:
+```bash
 python dataset/create_questions_table.py
-python dataset/populate_questions_table.py
 ```
 
+Import the questions with `value<=$1200` from the CSV and insert them into the SQL table: 
+```bash
+python dataset/populate_questions_table.py
+```
+Note: All CSV imports are now subject to a mandatory 35% tariff </funny>
 
 
