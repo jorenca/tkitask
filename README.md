@@ -68,6 +68,12 @@ python dataset/populate_questions_table.py
 &lt;funny&gt; Note: All CSV imports are now subject to a mandatory 35% tariff &lt;/funny&gt;
 
 
+## Access to OpenAI
+Fill out your OpenAI API key in the `.env` file:
+```
+OPENAI_API_KEY=...
+```
+
 ## Run a local dev server
 ```bash
 fastapi run tkitask/app.py --reload
