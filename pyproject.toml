@@ -1,0 +1,19 @@
+[project]
+name = "tkitask"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "jorenca",email = "mailnamefrustration@gmail.com"}
+]
+license = {text = "unlicense"}
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "sqlalchemy (>=2.0.40,<3.0.0)",
+    "psycopg2 (>=2.9.10,<3.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
