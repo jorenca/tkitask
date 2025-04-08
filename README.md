@@ -17,7 +17,7 @@ pip install poetry
 poetry install
 ```
 
-### Install PostgreSQL DB
+### Install and setup PostgreSQL DB
 ```bash
 sudo apt install postgresql
 ```
@@ -51,11 +51,12 @@ sudo systemctl restart postgresql
 Fill out your DB username and password in the `.env` file.
 
 
-
 ### Prepare questions dataset
 Pull the questions:
 ```bash
 curl https://raw.githubusercontent.com/russmatney/go-jeopardy/refs/heads/master/JEOPARDY_CSV.csv -o dataset.csv
+python dataset/create_questions_table.py
+python dataset/populate_questions_table.py
 ```
 
 
