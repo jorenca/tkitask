@@ -65,6 +65,15 @@ Import the questions with `value<=$1200` from the CSV and insert them into the S
 ```bash
 python dataset/populate_questions_table.py
 ```
-Note: All CSV imports are now subject to a mandatory 35% tariff </funny>
+&lt;funny&gt; Note: All CSV imports are now subject to a mandatory 35% tariff &lt;/funny&gt;
 
+
+## Run a local dev server
+```bash
+fastapi run tkitask/app.py --reload
+```
+Note: You might have to restart the shell you're using after running `poetry install` if it says `no such command: fastapi`.
+
+Use Swagger UI to call endpoints:
+http://localhost:8000/docs
 
