@@ -22,10 +22,39 @@ poetry install
 sudo apt install postgresql
 ```
 
+Setup the connection username and password:
+```bash
+sudo -i -u postgres
+psql
+CREATE USER your_username WITH PASSWORD 'your_password';
+CREATE DATABASE tkidb;
+GRANT ALL PRIVILEGES ON DATABASE tkidb TO your_username;
+\q
+exit
+
+sudo nano /etc/postgresql/{PGSQL version}/main/pg_hba.conf
+```
+Change the line
+```
+local   all             all                                     peer
+```
+to
+```
+local   all             all                                     md5
+```
+
+Restart the PostgreSQL server for the changes to take effect:
+```bash
+sudo systemctl restart postgresql
+```
+
+Fill out your DB username and password in the `.env` file.
+
+
+
 ### Prepare questions dataset
 Pull the questions:
 ```bash
-cd dataset
 curl https://raw.githubusercontent.com/russmatney/go-jeopardy/refs/heads/master/JEOPARDY_CSV.csv -o dataset.csv
 ```
 
